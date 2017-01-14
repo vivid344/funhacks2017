@@ -68,7 +68,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //loadNCMB();
         //WriteAreaCsv();
        // ReadAreaCsv();
-        saveNCMBforBook();
+        loadNCMBforBook();
+        //saveNCMBforBook("test1",10,3);
 //        statusMessage = (TextView)findViewById(R.id.status_message);
 //        barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
@@ -197,7 +198,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void loadNCMBforBook(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
         NCMBQuery<NCMBObject> query = new NCMBQuery<>("book");
-
+        query.addOrderByAscending("areaid");
         //データストアからデータを検索
         query.findInBackground(new FindCallback<NCMBObject>() {
             @Override
