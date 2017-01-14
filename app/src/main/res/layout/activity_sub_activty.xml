@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sub_activty"
     android:layout_width="match_parent"
@@ -21,4 +22,13 @@
         android:layout_marginStart="93dp"
         android:layout_marginTop="92dp"
         android:id="@+id/test" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+        android:layout_below="@+id/test"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="164dp"
+        android:id="@+id/imageView" />
 </RelativeLayout>
