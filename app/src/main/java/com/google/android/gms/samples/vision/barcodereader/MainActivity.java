@@ -59,6 +59,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ArrayList<Area> areas = new ArrayList<>();
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeMain";
+    private final int MAX_SZIE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void loadNCMB(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
         NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
+
+        final int modeNum[] = new int[MAX_SZIE];
+        for(int i = 0 ; i < MAX_SZIE ; i++)
+            modeNum[i] = 0;
+        //降順+14
+        query.addOrderByDescending("updateDate");
+        query.setLimit(14);
         for(int i = 0 ; i < 9 ; i++)
             areas.add(new Area(i,0));
         //データストアからデータを検索
@@ -152,10 +160,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     //検索失敗時の処理
                 } else {
                     for(NCMBObject result : results) {
+                        Log.d(TAG, "done: "+ result.getCreateDate());
+                        String cm = result.getString("cm");
+
+                        int mode = (int) Float.valueOf(cm).intValue();
+                        modeNum[mode]++;
                         areas.get(result.getInt("position")).addfreq();
                     }
                     //検索成功時の処理
-                    WriteAreaCsv();
+                    //WriteAreaCsv();
+             for(int i = 0 ; i < MAX_SZIE ; i++)
+                 Log.d(TAG, "done: i = "+i+", mode = "+modeNum[i]);
                 }
             }
         });
