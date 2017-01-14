@@ -35,6 +35,8 @@ import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -65,7 +67,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         NCMB.initialize(this.getApplicationContext(),"756b1daf9fec0415980c27527ffc3bda367dac55314756ad760c3095e3983f90","143921116f66ecb1f39062f21ff7bb7d5fbea8698b3146eb7b73d82b85abaa8c");
         loadNCMB();
-        losdAreaCsv();
+        //WriteAreaCsv();
+       // ReadAreaCsv();
 
         statusMessage = (TextView)findViewById(R.id.status_message);
         barcodeValue = (TextView)findViewById(R.id.barcode_value);
@@ -141,11 +144,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public void loadNCMB(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
-        NCMBQuery<NCMBObject> query = new NCMBQuery<>("test");
-
-        for(int i = 0 ; i < 10 ; i++)
-            areas.add(new Area(i,i));
-
+        NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
+        for(int i = 0 ; i < 9 ; i++)
+            areas.add(new Area(i,0));
         //データストアからデータを検索
         query.findInBackground(new FindCallback<NCMBObject>() {
             @Override
@@ -155,41 +156,60 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     //検索失敗時の処理
                 } else {
                     for(NCMBObject result : results) {
-                        Log.d(TAG, "done: cm =" + result.getCreateDate());
-                        areas.get(0).addfreq();
-                        //for(int i = 0 ; i < 10 ; i++)
-                            Log.d(TAG, "loadNCMB: "+areas.get(0).getFreq());
+                        areas.get(result.getInt("position")).addfreq();
                     }
                     //検索成功時の処理
+                    WriteAreaCsv();
                 }
             }
         });
 
     }
 
-    public void  losdAreaCsv(){
+
+    public void ReadAreaCsv() {
         // AssetManagerの呼び出し
+        AssetManager assetManager = getResources().getAssets();
         try {
-            // CSVファイルの読み込み
-            AssetManager assetManager = getApplicationContext().getResources().getAssets();
-            InputStream is = assetManager.open("area.csv");
-            InputStreamReader inputStreamReader = new InputStreamReader(is);
+            String openFileName = "area.csv";
+            FileInputStream input = this.openFileInput(openFileName);
+            InputStreamReader inputStreamReader = new InputStreamReader(input);
             BufferedReader bufferReader = new BufferedReader(inputStreamReader);
             String line = "";
+            int i = 0;
             while ((line = bufferReader.readLine()) != null) {
-                // 各行が","で区切られていて4つの項目があるとする
+                // 各行が","で区切られていて4つの項目があるとす
                 StringTokenizer st = new StringTokenizer(line, ",");
-                String first = st.nextToken();
-                String second = st.nextToken();
-                String third = st.nextToken();
-                String fourth = st.nextToken();
-                // 何らかの処理
-
-                Log.d(TAG, "losdAreaCsv: "+first);
+                while (st.hasMoreTokens()){
+                    areas.add(new Area(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())));
+                }
             }
             bufferReader.close();
+            // ストリームを閉じる
+            input.close();
+                for(Area area : areas)
+                    Log.d(TAG, "ReadAreaCsv: "+area.getId());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void WriteAreaCsv() {
+        String FileName = "area.csv";
+        try {
+            // 書き込み先のストリームを開く
+            FileOutputStream output = this.openFileOutput(FileName, MODE_PRIVATE);
+
+            for(Area area : areas) {
+                String line = area.getId()+","+area.getFreq();//id,fre q
+                output.write(line.getBytes());
+                output.write("\n".getBytes());
+            }
+            // ストリームを閉じる
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
