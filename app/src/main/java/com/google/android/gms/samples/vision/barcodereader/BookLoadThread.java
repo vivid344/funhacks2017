@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.barcodereader;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 
 /**
  * Created by b1014100_2 on 2017/01/15.
@@ -90,7 +92,11 @@ protected String doInBackground(String... value) {
 protected void onPostExecute(String result) {
 
         textView.setText(result);
-    imageView.setImageResource(R.drawable.common_full_open_on_phone);
+
+        Uri uri = Uri.parse("http://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1711/9784088801711.jpg?_ex=200x200");
+        Uri.Builder builder = uri.buildUpon();
+        AsyncTaskHttpRequest task = new AsyncTaskHttpRequest(imageView);
+        task.execute(builder);
         }
  }
 
