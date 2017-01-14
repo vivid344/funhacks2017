@@ -16,6 +16,7 @@
 
 package com.google.android.gms.samples.vision.barcodereader;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -85,13 +86,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.read_barcode) {
+       // if (v.getId() == R.id.read_barcode) {
             // launch barcode activity.
-            Intent intent = new Intent(this, BarcodeCaptureActivity.class);
+            // Intent intent = new Intent(this, BarcodeCaptureActivity.class);
 
-            startActivityForResult(intent, RC_BARCODE_CAPTURE);
-        }
-
+            //startActivityForResult(intent, RC_BARCODE_CAPTURE);
+       // }
+        Intent intent = new Intent(this, ListActivty.class);
+        startActivity(intent);
     }
 
     /**

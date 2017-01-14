@@ -39,7 +39,8 @@
             android:label="Read Barcode" />
         <activity
             android:name=".subActivty"
-            android:label="@string/title_activity_sub_activty"></activity>
+            android:label="@string/title_activity_sub_activty" />
+        <activity android:name=".ListActivty"></activity>
     </application>
 
 </manifest>
