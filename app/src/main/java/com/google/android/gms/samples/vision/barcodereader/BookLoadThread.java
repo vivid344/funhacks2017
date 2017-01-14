@@ -2,6 +2,8 @@ package com.google.android.gms.samples.vision.barcodereader;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,14 +22,17 @@ public class BookLoadThread extends AsyncTask<String, String, String> {
     private TextView textView;
     private ImageView imageView;
     private String bookName;
-/**
+    private Button button;
+private  String BookImageResouce;
+    /**
  * コンストラクタ
  */
-public BookLoadThread(TextView textView, ImageView imageView, String bookName) {
+public BookLoadThread(TextView textView, ImageView imageView,Button button,String bookName) {
         super();
         this.textView   = textView;
         this.imageView = imageView;
         this.bookName = bookName;
+        this.button = button;
     }
 
 /**
@@ -37,7 +42,7 @@ public BookLoadThread(TextView textView, ImageView imageView, String bookName) {
 protected String doInBackground(String... value) {
         HttpURLConnection con = null;
         URL url = null;
-        String urlSt = "http://52.198.212.162/server/Title/gettitle?message="+bookName;
+        String urlSt = "http://52.198.212.162/server/Title/gettitle?message="+ bookName;
         byte line[] = new byte[1024];
         String src = new String();
         try {
@@ -83,14 +88,14 @@ protected String doInBackground(String... value) {
         return src;
         }
 
-/**
- * バックグランド処理が完了し、UIスレッドに反映する
- */
-@Override
-protected void onPostExecute(String result) {
-
+    /**
+     * バックグランド処理が完了し、UIスレッドに反映する
+     */
+    @Override
+    protected void onPostExecute(String result) {
         textView.setText(result);
-    imageView.setImageResource(R.drawable.common_full_open_on_phone);
-        }
+        imageView.setImageResource(R.drawable.common_full_open_on_phone);
+        button.setVisibility(View.VISIBLE);
+    }
  }
 
