@@ -166,7 +166,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-
     public void ReadAreaCsv() {
         // AssetManagerの呼び出し
         AssetManager assetManager = getResources().getAssets();
