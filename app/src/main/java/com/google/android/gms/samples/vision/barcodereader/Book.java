@@ -9,12 +9,13 @@ public class Book {
     int Bookid;
     String name;
     float locat;
-
+    int areaId;
     /*-----constract---------------*/
-    public Book(int Bookid,String name, float locat){
+    public Book(int Bookid,String name, float locat,int areaId){
         this.Bookid = Bookid;
         this.name = name;
         this.locat  = locat;
+        this.areaId = areaId;
     }
 
    /*-----------getter-------------*/
@@ -29,7 +30,11 @@ public class Book {
         return Bookid;
     }
 
-/*-------------setter---------------*/
+    public int getAreaId() {
+        return areaId;
+    }
+
+    /*-------------setter---------------*/
     public void setBookid(int bookid) {
         Bookid = bookid;
     }
@@ -39,5 +44,9 @@ public class Book {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAreaId(int areaId) {
+        this.areaId = areaId;
     }
 }

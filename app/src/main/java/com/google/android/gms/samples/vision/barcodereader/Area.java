@@ -10,22 +10,16 @@ public class Area {
 
     int id;
     int freq;
-    ArrayList<Integer> Bookid = new ArrayList<>();
 
     /*------------constracter-----------*/
-    public Area(int id, int freq , ArrayList<Integer> bookid){
+    public Area(int id, int freq){
         this.id = id;
         this.freq = freq;
-        this.Bookid.addAll(bookid);
     }
 
     /*--------------getter-------------*/
     public int getId() {
         return id;
-    }
-
-    public ArrayList<Integer> getBookid() {
-        return Bookid;
     }
 
     public int getFreq() {
@@ -36,11 +30,12 @@ public class Area {
     public void setId(int id) {
         this.id = id;
     }
-    public void setBookid(ArrayList<Integer> bookid) {
-        Bookid = bookid;
-    }
 
     public void setFreq(int freq) {
         this.freq = freq;
+    }
+
+    public void addfreq(){
+        freq++;
     }
 }
