@@ -95,13 +95,15 @@ protected String doInBackground(String... value) {
      */
     @Override
     protected void onPostExecute(String result) {
-        textView.setText(result);
+        int node = result.indexOf(",");
+        Log.d("TEST", "onPostExecute: "+ result.substring(0,node));
+        textView.setText(result.substring(0,node));
         imageView.setImageResource(R.drawable.common_full_open_on_phone);
         button.setVisibility(View.VISIBLE);
-        Uri uri = Uri.parse("http://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1711/9784088801711.jpg?_ex=200x200");
+        Uri uri = Uri.parse(result.substring(node+1,result.length()));
         Uri.Builder builder = uri.buildUpon();
         AsyncTaskHttpRequest task = new AsyncTaskHttpRequest(imageView);
         task.execute(builder);
-        }
+    }
  }
 
