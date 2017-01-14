@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.nifty.cloud.mb.core.NCMB;
 
 /**
  * Main activity demonstrating how to pass extra parameters to an activity that
@@ -46,7 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        NCMB.initialize(this.getApplicationContext(),"756b1daf9fec0415980c27527ffc3bda367dac55314756ad760c3095e3983f90","143921116f66ecb1f39062f21ff7bb7d5fbea8698b3146eb7b73d82b85abaa8c");
         statusMessage = (TextView)findViewById(R.id.status_message);
         barcodeValue = (TextView)findViewById(R.id.barcode_value);
 

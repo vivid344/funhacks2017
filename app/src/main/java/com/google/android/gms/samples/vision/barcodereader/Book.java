@@ -11,7 +11,7 @@ public class Book {
     float locat;
 
     /*-----constract---------------*/
-    public Book(int Bookid, String name, float locat){
+    public Book(int Bookid,String name, float locat){
         this.Bookid = Bookid;
         this.name = name;
         this.locat  = locat;
