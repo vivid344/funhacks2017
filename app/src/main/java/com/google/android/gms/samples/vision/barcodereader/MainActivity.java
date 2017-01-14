@@ -70,8 +70,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //WriteAreaCsv();
        // ReadAreaCsv();
 
-        statusMessage = (TextView)findViewById(R.id.status_message);
-        barcodeValue = (TextView)findViewById(R.id.barcode_value);
+//        statusMessage = (TextView)findViewById(R.id.status_message);
+//        barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
 
 
@@ -116,6 +116,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * @see #createPendingResult
      * @see #setResult(int)
      */
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_BARCODE_CAPTURE) {
@@ -137,7 +138,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
+    }*/
 
     public void loadNCMB(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
