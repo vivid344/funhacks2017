@@ -20,14 +20,14 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.provider.ContactsContract;
+
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
+
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.vision.barcode.Barcode;
+
+import com.nifty.cloud.mb.core.DoneCallback;
 import com.nifty.cloud.mb.core.FindCallback;
 import com.nifty.cloud.mb.core.NCMB;
 import com.nifty.cloud.mb.core.NCMBException;
@@ -38,11 +38,10 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -66,10 +65,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NCMB.initialize(this.getApplicationContext(),"756b1daf9fec0415980c27527ffc3bda367dac55314756ad760c3095e3983f90","143921116f66ecb1f39062f21ff7bb7d5fbea8698b3146eb7b73d82b85abaa8c");
-        loadNCMB();
+        //loadNCMB();
         //WriteAreaCsv();
        // ReadAreaCsv();
-
+        saveNCMBforBook();
 //        statusMessage = (TextView)findViewById(R.id.status_message);
 //        barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
@@ -140,7 +139,31 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }*/
 
-    public void loadNCMB(){
+    public void loadNCMBforArea(){
+        //TestClassを検索するためのNCMBQueryインスタンスを作成
+        NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
+        //init areas
+        for(int i = 0 ; i < 9 ; i++)
+            areas.add(new Area(i,0));
+        //データストアからデータを検索
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    //検索失敗時の処理
+                    Log.d(TAG, "done: "+e);
+                } else {
+                    //検索成功時の処理
+                    for(NCMBObject result : results) {
+                        areas.get(result.getInt("position")).addfreq();
+                    }
+                    WriteAreaCsv();
+                }
+            }
+        });
+    }
+
+    public void loadNCMBforMode(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
         NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
 
@@ -150,8 +173,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //降順+14
         query.addOrderByDescending("updateDate");
         query.setLimit(14);
-        for(int i = 0 ; i < 9 ; i++)
-            areas.add(new Area(i,0));
         //データストアからデータを検索
         query.findInBackground(new FindCallback<NCMBObject>() {
             @Override
@@ -162,19 +183,54 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 } else {
                     for(NCMBObject result : results) {
                         String cm = result.getString("cm");
-
                         int mode = new Integer(cm).intValue();
-                        Log.d(TAG, "done: mode ="+mode);
                         modeNum[mode]++;
-                        areas.get(result.getInt("position")).addfreq();
                     }
                     //検索成功時の処理
-                    //WriteAreaCsv();
+                    //getModd
                     Log.d(TAG, "done: "+getMax(modeNum));
                 }
             }
         });
+    }
 
+    public void loadNCMBforBook(){
+        //TestClassを検索するためのNCMBQueryインスタンスを作成
+        NCMBQuery<NCMBObject> query = new NCMBQuery<>("book");
+
+        //データストアからデータを検索
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    Log.d(TAG, "done: "+e);
+                    //検索失敗時の処理
+                } else {
+                    for(NCMBObject result : results) {
+                        Log.d(TAG, "done: name = "+result.getString("name"));
+                    }
+                    //検索成功時の処理
+                }
+            }
+        });
+    }
+
+    public void saveNCMBforBook(String name, int location , int areaid){
+        //TestClassを検索するためのNCMBQueryインスタンスを作成
+        NCMBObject obj = new NCMBObject("book");
+        obj.put("name", name);
+        obj.put("locat",location);
+        obj.put("areaid", areaid);
+        obj.saveInBackground(new DoneCallback() {
+            @Override
+            public void done(NCMBException e) {
+                if (e != null) {
+                    //エラー発生時の処理
+                } else {
+                    //成功時の処理
+                }
+            }
+        });
     }
 
     public int getMax(int nums[]){
