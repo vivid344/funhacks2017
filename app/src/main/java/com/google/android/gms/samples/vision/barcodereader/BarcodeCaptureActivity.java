@@ -92,6 +92,7 @@ public final class BarcodeCaptureActivity extends AppCompatActivity {
 
         // read parameters from the intent used to launch the activity.
         boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
+        autoFocus = true;
         boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
 
         // Check for the camera permission before accessing the camera.  If the

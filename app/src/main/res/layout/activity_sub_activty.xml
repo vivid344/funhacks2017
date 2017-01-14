@@ -23,12 +23,12 @@
         android:layout_marginTop="92dp"
         android:id="@+id/test" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-        android:layout_below="@+id/test"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp"
-        android:id="@+id/imageView" />
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:srcCompat="@drawable/common_google_signin_btn_icon_dark"-->
+        <!--android:layout_below="@+id/test"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="164dp"-->
+        <!--android:id="@+id/imageView" />-->
 </RelativeLayout>
