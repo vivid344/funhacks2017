@@ -35,6 +35,8 @@ import com.nifty.cloud.mb.core.NCMBException;
 import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
+import junit.framework.Assert;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -70,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //WriteAreaCsv();
        // ReadAreaCsv();
       //  loadNCMBforBook();
+        deleatNMBCforBooks(8);
        // fixedNMBforBook(12,3);
         //saveNCMBforBook("test1",10,3);
 //        statusMessage = (TextView)findViewById(R.id.status_message);
@@ -142,7 +145,37 @@ public class MainActivity extends Activity implements View.OnClickListener {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }*/
-    public void fixedNMBforBook(final int first, final int second){
+
+    public void deleatNMBCforBooks(final int most){
+        NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
+        query.whereEqualTo("position",most);
+
+        query.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    //検索失敗時の処理
+                    Log.d(TAG, "done: "+e);
+                } else {
+                    //検索成功時の処理
+                    for(NCMBObject result : results) {
+                        NCMBObject obj = new NCMBObject("Books");
+                        obj.setObjectId(result.getObjectId());
+                        obj.deleteObjectInBackground(new DoneCallback() {
+                            @Override
+                            public void done(NCMBException e) {
+                                if (e != null) {
+                                    Assert.fail("delete object method should not raise exception:");
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+    }
+    public void fixedNMBCforBook(final int first, final int second){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
 
         NCMBQuery<NCMBObject> firstquery = new NCMBQuery<>("book");
