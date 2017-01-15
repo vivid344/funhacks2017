@@ -41,7 +41,6 @@
             android:name=".subActivty"
             android:label="@string/title_activity_sub_activty" />
         <activity android:name=".ListActivty" />
-        <activity android:name=".BookListAdapter"></activity>
     </application>
 
 </manifest>
