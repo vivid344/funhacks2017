@@ -42,9 +42,10 @@
             android:label="@string/title_activity_sub_activty" />
         <activity android:name=".ListActivty" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActipuvity">
 
         </activity>
+
     </application>
 
 </manifest>

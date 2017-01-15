@@ -35,6 +35,8 @@ import com.nifty.cloud.mb.core.NCMBException;
 import com.nifty.cloud.mb.core.NCMBObject;
 import com.nifty.cloud.mb.core.NCMBQuery;
 
+import junit.framework.Assert;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -66,13 +68,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NCMB.initialize(this.getApplicationContext(),"756b1daf9fec0415980c27527ffc3bda367dac55314756ad760c3095e3983f90","143921116f66ecb1f39062f21ff7bb7d5fbea8698b3146eb7b73d82b85abaa8c");
-        //loadNCMB();
-        //WriteAreaCsv();
-       // ReadAreaCsv();
-        loadNCMBforBook();
-        //saveNCMBforBook("test1",10,3);
-//        statusMessage = (TextView)findViewById(R.id.status_message);
-//        barcodeValue = (TextView)findViewById(R.id.barcode_value);
 
         findViewById(R.id.read_barcode).setOnClickListener(this);
     }
