@@ -21,7 +21,7 @@ public class DelaySplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(DelaySplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(DelaySplashActivity.this, StartActivity.class);
                 startActivity(intent);
                 finish();
             }
