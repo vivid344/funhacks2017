@@ -39,7 +39,7 @@ ArrayList<Area> areas = new ArrayList<>();
 
     public void touroku(View v){
         Intent sub_activity = new Intent();
-        sub_activity.setClassName("com.google.android.gms.samples.vision.barcodereader", "com.google.android.gms.samples.vision.barcodereader.MainActivity");
+        sub_activity.setClassName("com.google.android.gms.samples.vision.barcodereader", "com.google.android.gms.samples.vision.barcodereader.BarcodeCaptureActivity");
         startActivity(sub_activity);
     }
 

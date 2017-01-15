@@ -8,6 +8,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,5 +46,17 @@ TextView Bookname;
         Log.d(TAG, "Barcode read: " + barcode.displayValue);
         task = new BookLoadThread(Bookname,Bookimage,button,barcode.displayValue);
         task.execute("TEST");
+    }
+
+    public void kanryo(View v) {
+        Intent sub_activity = new Intent();
+        sub_activity.setClassName("com.google.android.gms.samples.vision.barcodereader", "com.google.android.gms.samples.vision.barcodereader.AddActivity");
+        startActivity(sub_activity);
+    }
+
+    public void cancel(View v){
+        Intent sub_activity = new Intent();
+        sub_activity.setClassName("com.google.android.gms.samples.vision.barcodereader", "com.google.android.gms.samples.vision.barcodereader.StartActivity");
+        startActivity(sub_activity);
     }
 }
