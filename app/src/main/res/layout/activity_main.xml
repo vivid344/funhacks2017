@@ -51,10 +51,19 @@
         android:layout_marginTop="0dp"
         android:adjustViewBounds="false" />
 
+    <!--<gradient-->
+        <!--android:angle="100"-->
+        <!--android:startColor="#FFFF0000"-->
+        <!--android:centerColor="#FF00FF00"-->
+        <!--android:endColor="#FF0000FF"-->
+        <!--android:type="sweep"/>-->
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -70,7 +79,8 @@
                 android:id="@+id/imageView1"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#55b10000" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -79,7 +89,8 @@
                 android:id="@+id/imageView2"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#55ff3000" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -88,7 +99,8 @@
                 android:id="@+id/imageView3"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#559aff64" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,7 +116,8 @@
                 android:id="@+id/imageView4"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#55b10000" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -113,7 +126,8 @@
                 android:id="@+id/imageView5"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#55ff3000" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -122,7 +136,8 @@
                 android:id="@+id/imageView6"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#559aff64" />
 
         </LinearLayout>
 
@@ -139,7 +154,8 @@
                 android:id="@+id/imageView7"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#551b1d87" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -148,7 +164,8 @@
                 android:id="@+id/imageView8"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#551b1d87" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -157,7 +174,8 @@
                 android:id="@+id/imageView9"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                android:background="#55196dfe" />
 
         </LinearLayout>
 
@@ -213,6 +231,7 @@
                 android:scaleType="centerCrop" />
         </LinearLayout>
     </LinearLayout>
+
 
 </RelativeLayout>
 

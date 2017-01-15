@@ -1,5 +1,6 @@
 package b1014116.wakaran;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,12 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String hardred = "#55b10000";
+        String softred = "#55ff3000";
+        String green = "#559aff64";
+        String softblue = "#55196dfe";
+        String hardblue = "#551b1d87";
 
 
     }
@@ -33,5 +40,8 @@ public class MainActivity extends AppCompatActivity {
         translate.setDuration(3000); // 3000msかけてアニメーションする
         img4.startAnimation(translate); // アニメーション適用
     }
+
+
+
 
 }
