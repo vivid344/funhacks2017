@@ -69,7 +69,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //loadNCMB();
         //WriteAreaCsv();
        // ReadAreaCsv();
-        loadNCMBforBook();
+      //  loadNCMBforBook();
+       // fixedNMBforBook(12,3);
         //saveNCMBforBook("test1",10,3);
 //        statusMessage = (TextView)findViewById(R.id.status_message);
 //        barcodeValue = (TextView)findViewById(R.id.barcode_value);
@@ -141,7 +142,74 @@ public class MainActivity extends Activity implements View.OnClickListener {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }*/
+    public void fixedNMBforBook(final int first, final int second){
+        //TestClassを検索するためのNCMBQueryインスタンスを作成
 
+        NCMBQuery<NCMBObject> firstquery = new NCMBQuery<>("book");
+        NCMBQuery<NCMBObject> secondquery = new NCMBQuery<>("book");
+
+        firstquery.whereEqualTo("areaid",first);
+        secondquery.whereEqualTo("areaid",second);
+        //データストアからデータを検索
+        firstquery.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    //検索失敗時の処理
+                    Log.d(TAG, "done: "+e);
+                } else {
+                    //検索成功時の処理
+                    int i = 0;
+                    for(NCMBObject result : results) {
+                        NCMBObject firstobj = new NCMBObject("book");
+                        firstobj.setObjectId(result.getObjectId());
+                        firstobj.put("name", result.getString("name"));
+                        firstobj.put("locat",result.getInt("locat"));
+                        firstobj.put("areaid", second);
+                        firstobj.saveInBackground(new DoneCallback() {
+                            @Override
+                            public void done(NCMBException e) {
+                                if (e != null) {
+                                    //エラー発生時の処理
+                                } else {
+                                    //成功時の処理
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        secondquery.findInBackground(new FindCallback<NCMBObject>() {
+            @Override
+            public void done(List<NCMBObject> results, NCMBException e) {
+                if (e != null) {
+                    //検索失敗時の処理
+                    Log.d(TAG, "done: "+e);
+                } else {
+                    //検索成功時の処理
+                    int i = 0;
+                    for(NCMBObject result : results) {
+                        NCMBObject firstobj = new NCMBObject("book");
+                        firstobj.setObjectId(result.getObjectId());
+                        firstobj.put("name", result.getString("name"));
+                        firstobj.put("locat",result.getInt("locat"));
+                        firstobj.put("areaid", first);
+                        firstobj.saveInBackground(new DoneCallback() {
+                            @Override
+                            public void done(NCMBException e) {
+                                if (e != null) {
+                                    //エラー発生時の処理
+                                } else {
+                                    //成功時の処理
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
     public void loadNCMBforArea(){
         //TestClassを検索するためのNCMBQueryインスタンスを作成
         NCMBQuery<NCMBObject> query = new NCMBQuery<>("Books");
