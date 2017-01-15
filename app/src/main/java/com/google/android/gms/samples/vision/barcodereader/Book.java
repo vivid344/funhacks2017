@@ -6,13 +6,13 @@ package com.google.android.gms.samples.vision.barcodereader;
 
 public class Book {
 
-    int Bookid;
+
     String name;
     float locat;
     int areaId;
     /*-----constract---------------*/
-    public Book(int Bookid,String name, float locat,int areaId){
-        this.Bookid = Bookid;
+    public Book(String name, float locat,int areaId){
+
         this.name = name;
         this.locat  = locat;
         this.areaId = areaId;
@@ -26,18 +26,12 @@ public class Book {
         return locat;
     }
 
-    public int getBookid() {
-        return Bookid;
-    }
 
     public int getAreaId() {
         return areaId;
     }
 
     /*-------------setter---------------*/
-    public void setBookid(int bookid) {
-        Bookid = bookid;
-    }
     public void setLocat(float locat) {
         this.locat = locat;
     }

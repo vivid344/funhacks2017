@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="125dp">
+    <LinearLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+         android:layout_height="76dp"
+        android:background="@drawable/result_ok">
+        <TextView
+            android:text="TextView"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            android:paddingTop="17dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/booklist_text" />
+    </LinearLayout>
+</LinearLayout>
