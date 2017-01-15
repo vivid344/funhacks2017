@@ -1,5 +1,6 @@
 package com.google.android.gms.samples.vision.barcodereader;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,7 +66,21 @@ public class ListActivty extends AppCompatActivity {
                     }
                     //検索成功時の処理
                     listView.setAdapter(adapter);
-                    listView.setOnItemClickListener(new SampleListItemClickListener(titleText));
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            // ListView
+                            ListView listView = (ListView)parent;
+                            // 選択された項目
+
+                            // 第2引数は適宜
+                            Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                            finish();
+                            finish();
+                            intent.putExtra("return",10000);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
         });
